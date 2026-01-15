@@ -10,11 +10,17 @@ import { useState, useEffect } from "react";
 import LoadingScreen from "./components/loading-screen";
 import { auth } from "./firebase";
 import styled from "styled-components";
+import ProtectedRoute from "./components/protected-route";
+import ResetEmail from "./components/reset-email";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "",
@@ -31,6 +37,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   { path: "/create-account", element: <CreateAccount /> },
+  { path: "/reset-password", element: <ResetEmail /> },
 ]);
 
 const GlobalStyles = createGlobalStyle`
@@ -41,7 +48,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     background-color : black;
     color : white;
-    font-family : system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   }
 `;
